@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Struk Belanja</title>
+  </head>
+  <body>
+    <h1>Struk Belanja</h1>
+    <p>Waktu: {{ waktu }}</p>
+    <p>Kasir: {{ nama_kasir }}</p>
+    <p>Produk:</p>
+    <ul>
+      {% for id, jumlah in keranjang_belanja.items() %}
+      <li>
+        {{ produk[id]['nama'] }}: {{ jumlah }} x Rp{{ produk[id]['harga'] }}
+      </li>
+      {% endfor %}
+    </ul>
+    <p>Total Belanja: Rp{{ total_belanja }}</p>
+    <p>Uang Diberikan: Rp{{ uang_diberikan }}</p>
+    <p>Kembalian: Rp{{ kembalian }}</p>
+  </body>
+</html>

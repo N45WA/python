@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Kasir</title>
+  </head>
+  <body>
+    <h1>Kasir</h1>
+    <form action="{{ url_for('kasir') }}" method="post">
+      {% for key, item in produk.items() %}
+      <div>
+        <label>{{ item.nama }} (Rp {{ item.harga }})</label>
+        <input type="number" name="{{ key }}" min="0" placeholder="Jumlah" />
+      </div>
+      {% endfor %}
+      <input type="submit" name="hitung_total" value="Hitung Total" />
+    </form>
+
+    {% if keranjang_belanja %}
+    <h2>Keranjang Belanja</h2>
+    <table>
+      <tr>
+        <th>Produk</th>
+        <th>Jumlah</th>
+        <th>Harga</th>
+      </tr>
+      {% for produk_id, jumlah in keranjang_belanja.items() %}
+      <tr>
+        <td>{{ produk[produk_id].nama }}</td>
+        <td>{{ jumlah }}</td>
+        <td>Rp{{ produk[produk_id].harga * jumlah }}</td>
+      </tr>
+      {% endfor %}
+      <tr>
+        <td colspan="2">Total Belanja</td>
+        <td>Rp{{ total_belanja }}</td>
+      </tr>
+    </table>
+
+    <form action="{{ url_for('kasir') }}" method="post">
+      <label for="uang_diberikan">Uang Diberikan</label>
+      <input type="number" id="uang_diberikan" name="uang_diberikan" required />
+      <input type="submit" name="proses" value="Proses Pembayaran" />
+    </form>
+    {% endif %}
+  </body>
+</html>
